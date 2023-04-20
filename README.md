@@ -4,7 +4,8 @@ For further, detailed information about this initiative please visit https://pro
 
 ## Environments
 - Preview: https://main--innovationlab-blog--netcentric.hlx.page/
-- Live: https://main--innovationlab-blog--netcentric.hlx.live/
+- Live hlx domain: https://main--innovationlab-blog--netcentric.hlx.live/
+- Live domain: https://newhorizons-blog.innovationlab.cx/
 
 ## Authoring Setup
 
