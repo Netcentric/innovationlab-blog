@@ -1,3 +1,36 @@
+/* tmp header layout */
+header .header {
+  display: flex;
+  margin: auto;
+}
+
+header .logo {
+  display: block;
+  width: 256px;
+  margin: auto 20px;
+}
+
+header .logo img {
+  width: 256px;
+}
+
+header .links {
+  display: flex;
+  list-style: none;
+  gap: 2;
+}
+
+header .links li {
+  margin: 10px;
+}
+
+header .nav-hamburger {
+  display: none;
+  visibility: hidden;
+}
+/* end tmp header layout */
+
+
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);

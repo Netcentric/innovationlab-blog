@@ -96,50 +96,31 @@ export default async function decorate(block) {
   const resp = await fetch(`${navPath}.plain.html`);
 
   if (resp.ok) {
-    const html = await resp.text();
-
     // decorate nav DOM
     const nav = document.createElement('nav');
     nav.id = 'nav';
-    nav.innerHTML = html;
+    nav.innerHTML = await resp.text();
 
-    const classes = ['brand', 'sections', 'tools'];
-    classes.forEach((c, i) => {
-      const section = nav.children[i];
-      if (section) section.classList.add(`nav-${c}`);
-    });
+    const logo = nav.querySelector('.icon-logo');
+    logo.innerHTML = `<img src="/icons/logo_black.svg" alt="New Horizons Spaceblog">`;
+    logo.parentElement.classList.add('logo');
+    
+    const links = nav.querySelector('ul');
+    links.classList.add('links')
 
-    const navSections = nav.querySelector('.nav-sections');
-    if (navSections) {
-      navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-        navSection.addEventListener('click', () => {
-          if (isDesktop.matches) {
-            const expanded = navSection.getAttribute('aria-expanded') === 'true';
-            toggleAllNavSections(navSections);
-            navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          }
-        });
-      });
-    }
-
+    // TODO enable mobile nav
     // hamburger for mobile
     const hamburger = document.createElement('div');
-    hamburger.classList.add('nav-hamburger');
-    hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-        <span class="nav-hamburger-icon"></span>
-      </button>`;
-    hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-    nav.prepend(hamburger);
-    nav.setAttribute('aria-expanded', 'false');
+    // hamburger.classList.add('nav-hamburger');
+    // hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+    //     <span class="nav-hamburger-icon"></span>
+    //   </button>`;
+    // hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
     // prevent mobile nav behavior on window resize
-    toggleMenu(nav, navSections, isDesktop.matches);
-    isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+    // toggleMenu(nav, navSections, isDesktop.matches);
+    // isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+    // decorateIcons(hamburger);
 
-    decorateIcons(nav);
-    const navWrapper = document.createElement('div');
-    navWrapper.className = 'nav-wrapper';
-    navWrapper.append(nav);
-    block.append(navWrapper);
+    block.replaceChildren(...[logo.parentNode, links, hamburger]);
   }
 }
