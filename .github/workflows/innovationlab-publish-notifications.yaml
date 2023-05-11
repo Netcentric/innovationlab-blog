@@ -12,7 +12,7 @@ jobs:
     - run: |
         echo "Status: ${{ github.event.client_payload.status }}"
         echo "Path: ${{ github.event.client_payload.path }}"
-        echo "Payload: ${{ github.event.client_payload }}"
+        echo "Payload: ${{ toJSON(github) }}"
   innovationlab-publish:
     if: github.event.client_payload.status == 200 || github.event.client_payload.status == 204
     runs-on: ubuntu-latest
