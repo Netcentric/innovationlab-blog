@@ -31,7 +31,7 @@ jobs:
         title=$(jq -r '.results[0].record.description' data.json)
         echo "Title: $title"
         tags=$(jq -r '.results[0].record.tags[]' data.json)
-        echo "Title: $tags"
+        echo "Tags: $tags"
     - name: Get current timestamp
       id: timestamp
       run: echo "current_timestamp=$(date -Is)" >> $GITHUB_ENV
