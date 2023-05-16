@@ -28,11 +28,11 @@ jobs:
       run: curl -o index.json https://admin.hlx.page/index/netcentric/innovationlab-blog/main/${{ steps.removeMd.outputs.replaced }}
     - name: Extract values from JSON
       run: |
-        title=$(jq -r '.results[0].record.description' data.json)
+        title=$(jq -r '.results[0].record.description' index.json)
         echo "Title: $title"
-        tags=$(jq -r '.results[0].record.tags[]' data.json)
+        tags=$(jq -r '.results[0].record.tags[]' index.json)
         echo "Tags: $tags"
-        image=$(jq -r '.results[0].record.image' data.json)
+        image=$(jq -r '.results[0].record.image' index.json)
         echo "Image: $image"
     - name: Get current timestamp
       id: timestamp
