@@ -25,7 +25,7 @@ jobs:
         string: ${{ github.event.client_payload.path }}
         replace-with: ''
     - name: Fetch Admin API
-      run: curl -o index.json https://admin.hlx.page/index/netcentric/innovationlab-blog/main/${{ steps.removeMd.outputs.replaced }}
+      run: curl -o index.json https://admin.hlx.page/index/netcentric/innovationlab-blog/main/${{ endsWith(github.event.client_payload.path, '.json') && github.event.client_payload.path || steps.removeMd.outputs.replaced }}
     - name: Extract values from JSON
       run: |
         title=$(jq -r '.results[0].record.description' index.json)
