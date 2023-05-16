@@ -28,11 +28,11 @@ jobs:
       run: curl -o index.json https://admin.hlx.page/index/netcentric/innovationlab-blog/main/${{ endsWith(github.event.client_payload.path, '.json') && github.event.client_payload.path || steps.removeMd.outputs.replaced }}
     - name: Extract values from JSON
       run: |
-        title=$(jq -r '.results[0].record.description' index.json)
+        echo "title=$(jq -r '.results[0].record.description' index.json)" >> $GITHUB_ENV
         echo "Title: $title"
-        tags=$(jq -r '.results[0].record.tags[]' index.json)
+        echo "tags=$(jq -r '.results[0].record.tags[]' index.json)" >> $GITHUB_ENV
         echo "Tags: $tags"
-        image=$(jq -r '.results[0].record.image' index.json)
+        echo "image=$(jq -r '.results[0].record.image' index.json)" >> $GITHUB_ENV
         echo "Image: $image"
     - name: Get current timestamp
       id: timestamp
