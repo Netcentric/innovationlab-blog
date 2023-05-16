@@ -24,6 +24,16 @@ jobs:
         pattern: '\.md$'
         string: ${{ github.event.client_payload.path }}
         replace-with: ''
+    - name: Fetch Admin API
+      run: curl -o index.json https://admin.hlx.page/index/netcentric/innovationlab-blog/main/${{ steps.removeMd.outputs.replaced }}
+    - name: Extract values from JSON
+      run: |
+        title=$(jq -r '.results[0].record.description' data.json)
+        echo "Title: $title"
+        tags=$(jq -r '.results[0].record.tags[]' data.json)
+        echo "Tags: $tags"
+        image=$(jq -r '.results[0].record.image' data.json)
+        echo "Image: $image"
     - name: Get current timestamp
       id: timestamp
       run: echo "current_timestamp=$(date -Is)" >> $GITHUB_ENV
@@ -40,5 +50,5 @@ jobs:
         aws lambda invoke \
           --function-name mvplab_prod_post_experience_event \
           --cli-binary-format raw-in-base64-out \
-          --payload '{"headers":{"aep-sandbox-name":"${{ secrets.AEP_SANDBOX_NAME }}"},"body":{"identityNamespaceId": "keycloakId","identityId": "${{ secrets.IDENTITY_ID }}","schemaId":"${{ secrets.SCHEMA_ID }}","datasetId":"${{ secrets.DATASET_ID }}","eventType":"BlogPost","payload":{"_netcentricgmbh":{"aemEvent":{"timestamp": "${{ env.current_timestamp }}", "title": "publication", "sourceSystem": "content", "path": ${{ toJson(env.url) }}}}}}}' \
+          --payload '{"headers":{"aep-sandbox-name":"${{ secrets.AEP_SANDBOX_NAME }}"},"body":{"identityNamespaceId": "keycloakId","identityId": "${{ secrets.IDENTITY_ID }}","schemaId":"${{ secrets.SCHEMA_ID }}","datasetId":"${{ secrets.DATASET_ID }}","eventType":"BlogPost","payload":{"_netcentricgmbh":{"aemEvent":{"action": "publish","timestamp": "${{ env.current_timestamp }}", "title": "${{ env.title }}", "tags": "${{ env.tags }}", "sourceSystem": "franklin", "path": ${{ toJson(env.url) }}}}}}}' \
           /dev/null
