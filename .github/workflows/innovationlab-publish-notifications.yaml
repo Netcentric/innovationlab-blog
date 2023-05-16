@@ -29,11 +29,8 @@ jobs:
     - name: Extract values from JSON
       run: |
         echo "title=$(jq -r '.results[0].record.description' index.json)" >> $GITHUB_ENV
-        echo "Title: $title"
         echo "tags=$(jq -r '.results[0].record.tags[]' index.json)" >> $GITHUB_ENV
-        echo "Tags: $tags"
         echo "image=$(jq -r '.results[0].record.image' index.json)" >> $GITHUB_ENV
-        echo "Image: $image"
     - name: Get current timestamp
       id: timestamp
       run: echo "current_timestamp=$(date -Is)" >> $GITHUB_ENV
