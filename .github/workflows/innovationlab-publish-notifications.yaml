@@ -30,6 +30,12 @@ jobs:
       run: |
         echo "title=$(jq -r '.results[0].record.description' index.json)" >> $GITHUB_ENV
         echo "image=$(jq -r '.results[0].record.image' index.json)" >> $GITHUB_ENV
+        tags=$(jq -r '.results[0].record.tags[]' index.json)
+        echo "tags_env_var<<EOF" >> $GITHUB_ENV
+        echo $tags >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
+        
+        
     - name: Get current timestamp
       id: timestamp
       run: echo "current_timestamp=$(date -Is)" >> $GITHUB_ENV
