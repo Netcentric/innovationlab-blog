@@ -30,7 +30,7 @@ jobs:
       run: |
         echo "title=$(jq -r '.results[0].record.description' index.json)" >> $GITHUB_ENV
         echo "image=$(jq -r '.results[0].record.image' index.json)" >> $GITHUB_ENV
-        echo "JSON=$(jq -c . < index.json)" >> $GITHUB_ENV        
+        echo "JSON=$(jq -s -c . < index.json)" >> $GITHUB_ENV        
         
     - name: Get current timestamp
       id: timestamp
@@ -48,5 +48,5 @@ jobs:
         aws lambda invoke \
           --function-name mvplab_prod_post_experience_event \
           --cli-binary-format raw-in-base64-out \
-          --payload '{"headers":{"aep-sandbox-name":"${{ secrets.AEP_SANDBOX_NAME }}"},"body":{"identityNamespaceId": "keycloakId","identityId": "${{ secrets.IDENTITY_ID }}","schemaId":"${{ secrets.SCHEMA_ID }}","datasetId":"${{ secrets.DATASET_ID }}","eventType":"BlogPost","payload":{"_netcentricgmbh":{"aemEvent":{"action": "xdmPublished","timestamp": "${{ env.current_timestamp }}", "title": "${{ env.title }}", "tags_array": "${{ fromJSON(fromJson(env.JSON).results[0].record.tags) }}", "image": "${{ env.image }}", "sourceSystem": "franklin", "path": ${{ toJson(env.path) }}}}}}}' \
+          --payload '{"headers":{"aep-sandbox-name":"${{ secrets.AEP_SANDBOX_NAME }}"},"body":{"identityNamespaceId": "keycloakId","identityId": "${{ secrets.IDENTITY_ID }}","schemaId":"${{ secrets.SCHEMA_ID }}","datasetId":"${{ secrets.DATASET_ID }}","eventType":"BlogPost","payload":{"_netcentricgmbh":{"aemEvent":{"action": "xdmPublished","timestamp": "${{ env.current_timestamp }}", "title": "${{ env.title }}", "tags_array": "${{ fromJson(env.JSON).results[0].record.tags }}", "image": "${{ env.image }}", "sourceSystem": "franklin", "path": ${{ toJson(env.path) }}}}}}}' \
           /dev/null
