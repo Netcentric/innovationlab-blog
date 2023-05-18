@@ -52,5 +52,5 @@ jobs:
         aws lambda invoke \
           --function-name mvplab_prod_post_experience_event \
           --cli-binary-format raw-in-base64-out \
-          --payload '{"headers":{"aep-sandbox-name":"${{ secrets.AEP_SANDBOX_NAME }}"},"body":{"identityNamespaceId": "keycloakId","identityId": "${{ secrets.IDENTITY_ID }}","schemaId":"${{ secrets.SCHEMA_ID }}","datasetId":"${{ secrets.DATASET_ID }}","eventType":"BlogPost","payload":{"_netcentricgmbh":{"aemEvent":{"action": "xdmPublished","timestamp": "${{ env.current_timestamp }}", "title": "${{ env.title }}", "tags_array": "${{ env.tags_env_var }}", "image": "${{ env.image }}", "sourceSystem": "franklin", "path": ${{ toJson(env.path) }}}}}}}' \
+          --payload '{"headers":{"aep-sandbox-name":"${{ secrets.AEP_SANDBOX_NAME }}"},"body":{"identityNamespaceId": "keycloakId","identityId": "${{ secrets.IDENTITY_ID }}","schemaId":"${{ secrets.SCHEMA_ID }}","datasetId":"${{ secrets.DATASET_ID }}","eventType":"BlogPost","payload":{"_netcentricgmbh":{"aemEvent":{"action": "xdmPublished","timestamp": "${{ env.current_timestamp }}", "title": "${{ env.title }}", "tags_array": "${{ fromJSON(env.tags_env_var) }}", "image": "${{ env.image }}", "sourceSystem": "franklin", "path": ${{ toJson(env.path) }}}}}}}' \
           /dev/null
