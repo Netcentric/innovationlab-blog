@@ -1,4 +1,4 @@
-name: Innovationlab Publish
+name: Innovationlab Unpublish
 
 on: 
   repository_dispatch:
