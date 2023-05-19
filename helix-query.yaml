@@ -30,3 +30,6 @@ indices:
       robots:
         select: head > meta[name="robots"]
         value: attribute(el, 'content')
+      author:
+        select: head > meta[name="author"]
+        value: attribute(el, 'content')
