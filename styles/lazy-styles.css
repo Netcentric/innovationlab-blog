@@ -1,1 +1,9 @@
 /* below the fold CSS goes here */
+
+@font-face{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    src: url("../fonts/Raleway-Medium.ttf") format("ttf");
+    font-display: swap;
+}
