@@ -46,7 +46,7 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 80px;
 
 }
 
@@ -59,6 +59,12 @@
     --heading-font-size-s: 24px;
     --heading-font-size-xs: 22px;
   }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --nav-height: 120px;
+    }
 }
 
 body {
