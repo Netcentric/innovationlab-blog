@@ -1,12 +1,15 @@
 footer {
-  padding: 2rem;
-  background-color: var(--overlay-background-color);
-  font-size: var(--body-font-size-s);
+  background-image: linear-gradient(338deg, rgb(153 131 181 / 50%) 0%,
+    rgb(131 140 181 / 50%) 6%,
+    rgb(255 255 255 / 0%) 30%);
+  font-family: var(--navigation-font-family);
+  padding: 40px 0;
 }
 
 footer .footer {
   max-width: 1200px;
   margin: auto;
+  padding: 0 15px;
 }
 
 footer .footer p {
@@ -14,15 +17,133 @@ footer .footer p {
 }
 
 footer .icon-logo_black svg {
-  width: 220px;
+  width: 219px;
   height: auto;
 }
 
-.footer > div {
+
+.footer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
 }
 
-.footer > div > div:nth-child(3){
-  grid-column: 1 / -1;
+.footer-nav {
+  display: grid;
+}
+
+.footer-social {
+  display: flex;
+}
+
+@media (max-width: 599px) {
+  .footer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-nav {
+    gap: 20px;
+  }
+
+  .footer-social {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (min-width: 600px) {
+  .footer-nav {
+    grid-auto-flow: column;
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    gap: 4%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .footer-social {
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-social {
+    justify-content: flex-end;
+  }
+
+  .footer-copyright {
+    place-self: end;
+  }
+}
+
+.footer-social ul {
+  list-style-type: none;
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-social a {
+  display: flex;
+}
+
+.footer-social p {
+  margin: 0;
+  font-size: var(--body-font-size-xs);
+}
+
+.footer-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-nav a,
+.footer-nav li,
+.footer-nav li:first-child a {
+  color: var(--col-3);
+  text-decoration: none;
+}
+
+.footer-nav a:hover,
+.footer-nav li:first-child a:hover {
+  color: var(--col-2);
+}
+
+.footer-nav a {
+  font-size: var(--body-font-size-2xs);
+}
+
+.footer-nav li {
+  margin-bottom: 5px;
+}
+
+.footer-nav li:first-child {
+  margin-bottom: 12px;
+}
+
+.footer-nav li:first-child,
+.footer-nav li:first-child a {
+  font-size: var(--body-font-size-xs);
+  font-weight: bold;
+}
+
+.footer-contact {
+  font-size: var(--body-font-size-3xs);
+}
+
+.footer-copyright {
+  font-size: var(--body-font-size-3xs);
+}
+
+.footer-copyright a {
+  color: var(--col-3);
+  text-decoration: none;
+}
+
+.footer-copyright a:hover {
+  color: var(--col-2);
 }
