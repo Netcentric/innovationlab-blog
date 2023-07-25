@@ -12,6 +12,13 @@
 
  :root {
   /* colors */
+  --col-1: #FF00C7;
+  --col-2: #05fff0;
+  --col-3: #000;
+  --col-4: #fff;
+  --col-5: #ececec;
+  --col-6: #1b1b1b;
+  --col-7: #363636;
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
   --background-color: #fff;
@@ -20,6 +27,7 @@
   --text-color: #000;
 
   /* fonts */
+  --navigation-font-family: 'Raleway', sans-serif;
   --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
@@ -38,7 +46,7 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 80px;
 
 }
 
@@ -51,6 +59,12 @@
     --heading-font-size-s: 24px;
     --heading-font-size-xs: 22px;
   }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --nav-height: 120px;
+    }
 }
 
 body {
