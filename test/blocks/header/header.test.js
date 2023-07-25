@@ -38,13 +38,13 @@ describe('Header block', () => {
     expect(nav.getAttribute('aria-expanded')).to.equal('false');
   });
 
-  it('Section title shows and hides section on desktop', async () => {
+  it('Navigation is expanded on desktop and collapsed on mobile.', async () => {
     await setViewport({ width: 900, height: 640 });
-    const sections = document.querySelector('.header .nav-sections');
-    const title = sections.querySelector(':scope li');
-    title.click();
-    expect(title.getAttribute('aria-expanded')).to.equal('true');
-    title.click();
-    expect(title.getAttribute('aria-expanded')).to.equal('false');
+    await sleep(100);
+    const nav = document.querySelector('.header nav');
+    expect(nav.getAttribute('aria-expanded')).to.equal('true');
+    await setViewport({ width: 320, height: 640 });
+    await sleep(100);
+    expect(nav.getAttribute('aria-expanded')).to.equal('false');
   });
 });

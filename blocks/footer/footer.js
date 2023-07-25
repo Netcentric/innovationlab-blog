@@ -13,13 +13,20 @@ export default async function decorate(block) {
   const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
 
   if (resp.ok) {
-    const html = await resp.text();
-
     // decorate footer DOM
     const footer = document.createElement('div');
-    footer.innerHTML = html;
+    footer.innerHTML = await resp.text();
 
-    decorateIcons(footer);
-    block.append(footer);
+    const [logo, social, nav, contact, copyright] = footer.children;
+
+    logo.classList.add('footer-logo');
+    social.classList.add('footer-social');
+    nav.classList.add('footer-nav');
+    contact.classList.add('footer-contact');
+    copyright.classList.add('footer-copyright');
+
+    block.innerHTML = footer.innerHTML;
+
+    decorateIcons(block);
   }
 }
